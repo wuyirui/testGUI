@@ -18,7 +18,7 @@ namespace testGUI
     {
         private Thread run;
         private bool clicked;
-        private string dir = @"C:\Users\IDLER\Documents\Hydrology\";
+        private string dir = @"./Hydrology-Compile/";
         private string prefix = "python ";
         private string suffix = " 1>&2 ";
         private Dictionary<string, string> Button2Script = new Dictionary<string,string>();
@@ -50,8 +50,8 @@ namespace testGUI
             //
             clock_Tick(new Object(), new EventArgs());
             //
-            Button2Script.Add(YangtseButton.Text, @"2-YangtseRiver\|YangtseRiver.py|parseList.py");
-            Button2Script.Add(RiverwayButton.Text, @"3-KeyRiverway\|KeyRiverway.py|parseTable.py");
+            Button2Script.Add(YangtseButton.Text, @"2-YangtseRiver\|YangtseRiver.pyc|parseList.pyc");
+            Button2Script.Add(RiverwayButton.Text, @"3-KeyRiverway\|KeyRiverway.pyc|parseTable.pyc");
             Button2Script.Add(ProvinceButton.Text, @"4-Province\|parseTable.py");
         }
 
@@ -91,7 +91,8 @@ namespace testGUI
             ProgressText.Text = "正在下载[" + btstr + "]数据";
             Process p = createCMD();
             p.StandardInput.WriteLine("cd " + dir);
-            p.StandardInput.WriteLine(cmd + " & exit");
+            //"dir 1>&2 &" +
+            p.StandardInput.WriteLine( cmd + " & exit");
             p.WaitForExit();
             p.Close();
             ProgressText.Text = "[" + btstr + "]数据下载完成";

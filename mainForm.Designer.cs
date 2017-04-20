@@ -52,11 +52,14 @@
             this.selectRegion = new System.Windows.Forms.ComboBox();
             this.ToPicker = new System.Windows.Forms.DateTimePicker();
             this.FromPicker = new System.Windows.Forms.DateTimePicker();
-            this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.normalWinMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.TodayPage.SuspendLayout();
             this.HistoryPage.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // YangtseButton
@@ -117,6 +120,7 @@
             // 
             // notifyIcon
             // 
+            this.notifyIcon.ContextMenuStrip = this.contextMenuStrip1;
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "Hydrology";
             this.notifyIcon.Visible = true;
@@ -126,7 +130,7 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 238);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 248);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(441, 22);
             this.statusStrip1.TabIndex = 6;
@@ -147,10 +151,10 @@
             // 
             this.tabControl.Controls.Add(this.TodayPage);
             this.tabControl.Controls.Add(this.HistoryPage);
-            this.tabControl.Location = new System.Drawing.Point(12, 11);
+            this.tabControl.Location = new System.Drawing.Point(11, 26);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(425, 219);
+            this.tabControl.Size = new System.Drawing.Size(425, 218);
             this.tabControl.TabIndex = 8;
             // 
             // TodayPage
@@ -164,7 +168,7 @@
             this.TodayPage.Location = new System.Drawing.Point(4, 22);
             this.TodayPage.Name = "TodayPage";
             this.TodayPage.Padding = new System.Windows.Forms.Padding(3);
-            this.TodayPage.Size = new System.Drawing.Size(417, 193);
+            this.TodayPage.Size = new System.Drawing.Size(417, 192);
             this.TodayPage.TabIndex = 0;
             this.TodayPage.Text = "Today";
             this.TodayPage.UseVisualStyleBackColor = true;
@@ -189,7 +193,7 @@
             this.HistoryPage.Location = new System.Drawing.Point(4, 22);
             this.HistoryPage.Name = "HistoryPage";
             this.HistoryPage.Padding = new System.Windows.Forms.Padding(3);
-            this.HistoryPage.Size = new System.Drawing.Size(417, 193);
+            this.HistoryPage.Size = new System.Drawing.Size(417, 192);
             this.HistoryPage.TabIndex = 1;
             this.HistoryPage.Text = "History";
             this.HistoryPage.UseVisualStyleBackColor = true;
@@ -264,12 +268,34 @@
             this.FromPicker.Size = new System.Drawing.Size(212, 21);
             this.FromPicker.TabIndex = 0;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.normalWinMenuItem,
+            this.exitMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
+            // 
+            // normalWinMenuItem
+            // 
+            this.normalWinMenuItem.Name = "normalWinMenuItem";
+            this.normalWinMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.normalWinMenuItem.Text = "恢复窗口";
+            this.normalWinMenuItem.Click += new System.EventHandler(this.normalWinMenuItem_Click);
+            // 
+            // exitMenuItem
+            // 
+            this.exitMenuItem.Name = "exitMenuItem";
+            this.exitMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitMenuItem.Text = "退出";
+            this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(441, 260);
+            this.ClientSize = new System.Drawing.Size(441, 270);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.statusStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -287,6 +313,7 @@
             this.TodayPage.PerformLayout();
             this.HistoryPage.ResumeLayout(false);
             this.HistoryPage.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -316,7 +343,9 @@
         private System.Windows.Forms.DateTimePicker FromPicker;
         private System.Windows.Forms.RichTextBox HistoryMessage;
         private System.Windows.Forms.Label ProgressText;
-        private System.DirectoryServices.DirectoryEntry directoryEntry1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem normalWinMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
     }
 }
 

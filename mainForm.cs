@@ -211,5 +211,15 @@ namespace testGUI
             }
         }
 
+        private void exitMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void normalWinMenuItem_Click(object sender, EventArgs e)
+        {
+            notifyIcon_MouseDoubleClick(sender, e as MouseEventArgs);
+        }
+
     }
 }

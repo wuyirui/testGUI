@@ -32,9 +32,9 @@ namespace testGUI
             // 
             this.Text = "全国水文信息";
             notifyIcon.Text = "全国水文信息";
-            YangtseButton.Text = "长江航道";
-            RiverwayButton.Text = "全国水雨情";
-            ProvinceButton.Text = "各省水雨情";
+            //YangtseButton.Text = "长江航道";
+            //RiverwayButton.Text = "全国水雨情";
+            //ProvinceButton.Text = "各省水雨情";
             HistoryButton.Text = "下载";
             TodayPage.Text = "当日";
             HistoryPage.Text = "历史";
@@ -50,9 +50,9 @@ namespace testGUI
             //
             clock_Tick(new Object(), new EventArgs());
             //
-            Button2Script.Add(YangtseButton.Text, @"2-YangtseRiver\|YangtseRiver.pyc|parseList.pyc");
-            Button2Script.Add(RiverwayButton.Text, @"3-KeyRiverway\|KeyRiverway.pyc|parseTable.pyc");
-            Button2Script.Add(ProvinceButton.Text, @"4-Province\|parseTable.py");
+            //Button2Script.Add(YangtseButton.Text, @"2-YangtseRiver\|YangtseRiver.pyc|parseList.pyc");
+            //Button2Script.Add(RiverwayButton.Text, @"3-KeyRiverway\|KeyRiverway.pyc|parseTable.pyc");
+            //Button2Script.Add(ProvinceButton.Text, @"4-Province\|Province.pyc|parseTable.pyc|reorganizeTable.pyc");
         }
 
         private void OutputHandler(object sendingProcess, DataReceivedEventArgs outLine)
@@ -63,6 +63,9 @@ namespace testGUI
                 ProgressText.Text = outLine.Data;
             }
             progressBar.Value = (progressBar.Value + 10) % progressBar.Maximum;
+            progressBar1.Value = (progressBar.Value + 10) % progressBar.Maximum;
+            progressBar2.Value = (progressBar.Value + 10) % progressBar.Maximum;
+            progressBar3.Value = (progressBar.Value + 10) % progressBar.Maximum;
         }
 
         Process createCMD()
@@ -117,6 +120,9 @@ namespace testGUI
             }
             //string cmd = prefix + script + suffix;
             progressBar.Value = 0;
+            progressBar1.Value = 0;
+            progressBar2.Value = 0;
+            progressBar3.Value = 0;
             showTime(buttonText);
             run = new Thread(new ParameterizedThreadStart(CMD));
             run.IsBackground = true;
@@ -137,16 +143,17 @@ namespace testGUI
             if (clicked && run.IsAlive)
             {
                 //progressBar.Value = (progressBar.Value + 1) % progressBar.Maximum;
-                YangtseButton.Enabled = false;
-                RiverwayButton.Enabled = false;
-                ProvinceButton.Enabled = false;
+                //YangtseButton.Enabled = false;
+                //RiverwayButton.Enabled = false;
+                //ProvinceButton.Enabled = false;
                 HistoryButton.Enabled = false;
             }
-            else {
+            else
+            {
                 progressBar.Value = progressBar.Maximum;
-                YangtseButton.Enabled = true;
-                RiverwayButton.Enabled = true;
-                ProvinceButton.Enabled = true;
+                //YangtseButton.Enabled = true;
+                //RiverwayButton.Enabled = true;
+                //ProvinceButton.Enabled = true;
                 HistoryButton.Enabled = true;
             }
 
@@ -187,6 +194,11 @@ namespace testGUI
             DateTime to = ToPicker.Value.Date;
             DateTime now = DateTime.Now.Date;
 
+            if (Math.Abs(double.Parse(textBox1.Text)) > 180 || Math.Abs(double.Parse(textBox2.Text)) > 90)
+            {
+                MessageBox.Show("经纬度输入格式错误", "警告", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             if (to > now) 
             {
                 MessageBox.Show("对不起，我们无法下载未来数据", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -220,6 +232,18 @@ namespace testGUI
         {
             notifyIcon_MouseDoubleClick(sender, e as MouseEventArgs);
         }
+
+        private void ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void 帮助ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("若表示南纬，需在纬度值前加负号；若表示西经,需在经度值前加负号");
+        }
+
+       
 
     }
 }
